@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc">
+
+    <context:component-scan base-package="io.safedrive.payments"/>
+    <mvc:annotation-driven/>
+    
+    <bean id="paymillContext" class="com.paymill.context.PaymillContext">
+        <constructor-arg value="6f6168718370d7072dbf69b8bab10902" />
+    </bean>
+
+    <bean id="clientController" class="io.safedrive.payments.paymill.ClientController">
+        <property name="clientService" ref="paymillContext" />
+    </bean>
+    
+    <bean id="paymentController" class="io.safedrive.payments.paymill.PaymentController">
+        <property name="paymentService" ref="paymillContext" />
+    </bean>
+
+</beans>

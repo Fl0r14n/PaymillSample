@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Paymill Sample</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="lib/normalize.css/normalize.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="lib/bootstrap/dist/css/bootstrap-theme.css"/>
+    </head>
+    <body ng-app="app">
+        <div ng-controller="PaymillController as paymillCtrl" ng-init="paymillCtrl.amountElem.value=5000; paymillCtrl.currencyElem.value='RON'">            
+            <form name="paymentForm">
+
+                <div class="form-group has-feedback" ng-class="{'has-warning': paymentForm.number.$dirty && paymentForm.number.$invalid, 'has-success': paymentForm.number.$valid, 'has-error':paymillCtrl.numberElem.invalid}">
+                    <label class="control-label" for="number">Card number</label>
+                    <input class="form-control" type="text" name="number" placeholder="XXXXXXXXXXXXXXXX" ng-minlength="16" ng-maxlength="16" ng-model="paymillCtrl.numberElem.value" required/>
+                    <span class="glyphicon form-control-feedback" ng-class="{'has-warning': paymentForm.number.$dirty && form.card-number.$invalid, 'has-success': paymentForm.number.$valid, 'has-error':paymillCtrl.numberElem.invalid}"></span>
+                </div>
+                
+                <div class="form-group has-feedback" ng-class="{'has-warning': paymentForm.cvc.$dirty && paymentForm.cvc.$invalid, 'has-success': paymentForm.cvc.$valid, 'has-error':paymillCtrl.cvcElem.invalid}">
+                    <label class="control-label" for="cvc">CVC</label>
+                    <input class="form-control" type="text" name="cvc" placeholder="XXX" ng-minlength="3" ng-maxlength="3" ng-model="paymillCtrl.cvcElem.value" required/>
+                    <span class="glyphicon form-control-feedback" ng-class="{'has-warning': paymentForm.cvc.$dirty && paymentForm.cvc.$invalid, 'has-success': paymentForm.cvc.$valid, 'has-error':paymillCtrl.cvcElem.invalid}"></span>
+                </div>
+                
+                <div class="form-group has-feedback" ng-class="{'has-warning': paymentForm.holder.$dirty && paymentForm.holder.$invalid, 'has-success': paymentForm.holder.$valid, 'has-error':paymillCtrl.holderElem.invalid}">
+                    <label class="control-label" for="holder">Name</label>
+                    <input class="form-control" type="text" name="holder" placeholder="John Doe" ng-minlength="3" ng-model="paymillCtrl.holderElem.value" required/>
+                    <span class="glyphicon form-control-feedback" ng-class="{'has-warning': paymentForm.holder.$dirty && paymentForm.holder.$invalid, 'has-success': paymentForm.holder.$valid, 'has-error':paymillCtrl.holderElem.invalid}"></span>
+                </div>
+                
+                <div class="form-group has-feedback" ng-class="{'has-warning': paymentForm.expiry.$dirty && paymentForm.expiry.$invalid, 'has-success': paymentForm.expiry.$valid, 'has-error':paymillCtrl.expiryElem.invalid}">
+                    <label class="control-label" for="expiry">Expiry date</label>
+                    <div class="input-group">
+                        <input class="form-control" name="expiry" type="text" datepicker-options="paymillCtrl.expiryElem.options" datepicker-popup="MM/yyyy" close-on-date-selection="true" show-button-bar="false" ng-readonly="paymillCtrl.expiryElem.readonly" ng-model="paymillCtrl.expiryElem.value" is-open="paymillCtrl.expiryElem.opened" required>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-disabled="paymillCtrl.expiryElem.readonly" ng-click="paymillCtrl.expiryElem.toogle($event)">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" ng-disabled="paymentForm.$invalid" ng-click="paymillCtrl.submit()">Submit Payment</button>
+                <ui-alert type="danger" show-close="true" bool-variable="paymillCtrl.errorElem.show">{{paymillCtrl.errorElem.value}}</ui-alert>
+                <ui-alert type="success" show-close="true" bool-variable="paymillCtrl.successElem.show">{{paymillCtrl.successElem.value}}</ui-alert>
+            </form>
+            <p>In order to test the payment process, you may use the following credit card numbers:<br/>
+Visa: 4111111111111111<br/>
+Mastercard: 5105105105105100<br/>
+Maestro UK: 6799851000000032<br/>
+Discover: 6011587918359498 (Support by Paymill is planned)<br/>
+Solo: 6334580500000000 (Support by Paymill is planned)<br/>
+Please, always enter an expiration date in the future. Expiration dates in the past will cause the transaction to fail.<br/>
+3-D Secure credit card<br/>
+Visa:4012888888881881<br/>
+You can use this test card number to run a test against a 3-D Secure enabled transaction. Using 3-D secure adds an additional layer of security to your transactions and helps to protect merchants against fraud.<br/>
+Note that the 3-D Secure test card can only be used when using your API live key.<br/>
+Using the 3-D Secure test card while using the API test key will cause an error to be thrown. As it is a test card, there's no need to worry about being charged when testing with the API live key.</p>
+            
+        </div>
+
+        <script type="text/javascript"> var PAYMILL_PUBLIC_KEY = '5280509521889fc7d2a8c86213c7ce51';</script>
+        <script type="text/javascript" src="https://bridge.paymill.com/"></script>    
+        <script type="text/javascript" src="lib/angular/angular.js"></script>
+        <script type="text/javascript" src="lib/angular-animate/angular-animate.js"></script>
+        <script type="text/javascript" src="lib/angular-route/angular-route.js"></script>
+        <script type="text/javascript" src="lib/angular-resource/angular-resource.js"></script>
+        <script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap.js"></script>
+        <script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/controller.js"></script>
+        <script type="text/javascript" src="js/service.js"></script>
+        <script type="text/javascript" src="js/directive.js"></script>
+    </body>
+</html>

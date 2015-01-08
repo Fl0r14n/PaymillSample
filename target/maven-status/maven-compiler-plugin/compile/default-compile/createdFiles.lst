@@ -1,0 +1,16 @@
+io/safedrive/payments/paymill/resources/RefundsResource.class
+io/safedrive/payments/paymill/resources/PaymentResource.class
+io/safedrive/payments/paymill/resources/internal/InvoiceResource.class
+io/safedrive/payments/paymill/resources/TransactionResource.class
+io/safedrive/payments/paymill/resources/OfferResource$SubscriptionCountResource.class
+io/safedrive/payments/paymill/resources/TokenResource.class
+io/safedrive/payments/paymill/resources/ClientResource.class
+io/safedrive/payments/paymill/resources/Resource.class
+io/safedrive/payments/paymill/resources/DebitCardPaymentResource.class
+io/safedrive/payments/paymill/resources/CreditCardPaymentResource.class
+io/safedrive/payments/paymill/resources/SubscriptionResource.class
+io/safedrive/payments/paymill/resources/OfferResource.class
+io/safedrive/payments/paymill/resources/PreauthorizationResource.class
+io/safedrive/payments/paymill/resources/internal/FeeResource.class
+io/safedrive/payments/paymill/ClientController.class
+io/safedrive/payments/paymill/PaymentController.class
